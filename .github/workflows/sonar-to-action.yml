@@ -16,13 +16,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Full clone for better analysis
+          fetch-depth: 0
 
       - name: SonarQube Scan
-        uses: sonarsource/sonarcloud-github-action@v3.0.0
+        uses: sonarsource/sonarcloud-github-action@v2.0.0
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Required for PR decoration
+          SONAR_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          projectKey: marvin00799_DVWA
-          organization: marvin00799
+          args: >
+            -Dsonar.projectKey=marvin00799_DVWA
+            -Dsonar.organization=marvin00799
+            -Dsonar.projectBaseDir=${{ github.workspace }}
