@@ -1,4 +1,4 @@
-name: SonarQube Analysis
+name: SonarQube CI Analysis
 on:
   push:
     branches: [main, master, develop]
@@ -16,9 +16,11 @@ jobs:
       - name: SonarQube Scan
         uses: sonarsource/sonarcloud-github-action@v3.0.0
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # ← Correct variable name
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Automatic
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           args: >
             -Dsonar.projectKey=marvin00799_DVWA
             -Dsonar.organization=marvin00799
+            -Dsonar.ci=true
+            -Dsonar.projectBaseDir=${{ github.workspace }}
