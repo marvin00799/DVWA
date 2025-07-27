@@ -1,3 +1,4 @@
+  env:
 on:
   push:
     branches:
@@ -19,7 +20,10 @@ jobs:
           fetch-depth: 0  # Full clone for better analysis
 
       - name: SonarQube Scan
-        uses: sonarsource/sonarcloud-github-action@v3.0.0  # Latest stable version
+        uses: sonarsource/sonarcloud-github-action@v3.0.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Required for PR decoration
+        with:
+          projectKey: marvin00799_DVWA
+          organization: marvin00799
